@@ -78,4 +78,10 @@ describe("TimeInterval", () => {
   ])("$name", ({ interval1, interval2, want }) => {
     expect(interval1.subtract(interval2)).toEqual(want);
   });
+
+  test("stringifies a TimeInterval", () => {
+    const interval = new TimeInterval(new ClockTime(1, 0), new ClockTime(2, 0));
+
+    expect(interval.toString()).toBe("(01:00, 02:00)");
+  });
 });

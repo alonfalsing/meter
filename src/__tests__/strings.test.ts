@@ -2,12 +2,7 @@ import { describe, expect, test } from "@jest/globals";
 import { padStart } from "../strings";
 
 describe("padStart", () => {
-  test.each<{
-    name: string;
-    length: number;
-    pad?: string;
-    want?: string;
-  }>([
+  test.each([
     {
       name: "pads a string with spaces",
       length: 10,

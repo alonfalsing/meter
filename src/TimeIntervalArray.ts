@@ -19,7 +19,7 @@ export class TimeIntervalArray {
     );
   }
 
-  [Symbol.toPrimitive]() {
-    return `[${this.intervals.map((each) => each[Symbol.toPrimitive]()).join(", ")}]`;
+  toString() {
+    return `[${this.intervals.join(", ")}]`;
   }
 }

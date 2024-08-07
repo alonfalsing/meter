@@ -33,7 +33,7 @@ export class TimeInterval {
     return intervals;
   }
 
-  [Symbol.toPrimitive]() {
-    return `${this.start} ~ ${this.end}`;
+  toString() {
+    return `(${this.start}, ${this.end})`;
   }
 }

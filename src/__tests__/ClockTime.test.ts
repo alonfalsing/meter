@@ -16,11 +16,7 @@ describe("ClockTime", () => {
     expect(time.minute).toBe(30);
   });
 
-  test.each<{
-    hour?: number;
-    minute: number;
-    error: string;
-  }>([
+  test.each([
     {
       minute: -1,
       error: "Invalid time: -1",

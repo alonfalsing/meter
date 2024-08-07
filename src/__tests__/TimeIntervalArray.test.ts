@@ -22,7 +22,7 @@ describe("TimeIntervalArray", () => {
     ];
 
     expect(() => new TimeIntervalArray(intervals)).toThrowError(
-      "Overlapping intervals: 01:00 ~ 02:00, 01:30 ~ 02:30",
+      "Overlapping intervals: (01:00, 02:00), (01:30, 02:30)",
     );
   });
 
@@ -62,5 +62,14 @@ describe("TimeIntervalArray", () => {
     ]);
 
     expect(intervalArray.subtract(interval)).toEqual(want);
+  });
+
+  test("stringifies a TimeIntervalArray", () => {
+    const intervalArray = new TimeIntervalArray([
+      new TimeInterval(new ClockTime(1, 0), new ClockTime(2, 0)),
+      new TimeInterval(new ClockTime(3, 0), new ClockTime(4, 0)),
+    ]);
+
+    expect(intervalArray.toString()).toBe("[(01:00, 02:00), (03:00, 04:00)]");
   });
 });

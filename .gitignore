@@ -13,6 +13,8 @@
 .pnp.*
 
 .idea/
-dist/
-
 .eslintcache
+.DS_Store
+
+coverage/
+dist/
