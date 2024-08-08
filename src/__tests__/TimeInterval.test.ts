@@ -29,6 +29,37 @@ describe("TimeInterval", () => {
     );
   });
 
+  test.each([
+    {
+      name: "contains start time",
+      time: new ClockTime(1, 0),
+      want: true,
+    },
+    {
+      name: "contains end time",
+      time: new ClockTime(2, 0),
+      want: true,
+    },
+    {
+      name: "contains a time within the interval",
+      time: new ClockTime(1, 30),
+      want: true,
+    },
+    {
+      name: "does not contain a time before the interval",
+      time: new ClockTime(0, 30),
+      want: false,
+    },
+    {
+      name: "does not contain a time after the interval",
+      time: new ClockTime(2, 30),
+      want: false,
+    },
+  ])("$name", ({ time, want }) => {
+    const interval = new TimeInterval(new ClockTime(1, 0), new ClockTime(2, 0));
+    expect(interval.contains(time)).toBe(want);
+  });
+
   test("checks for overlap", () => {
     const interval1 = new TimeInterval(
       new ClockTime(1, 0),
@@ -77,6 +108,23 @@ describe("TimeInterval", () => {
     },
   ])("$name", ({ interval1, interval2, want }) => {
     expect(interval1.subtract(interval2)).toEqual(want);
+  });
+
+  test.each([
+    {
+      name: "ticks a time interval",
+      interval: new TimeInterval(new ClockTime(1, 0), new ClockTime(2, 0)),
+      minutes: 30,
+      want: [new ClockTime(1, 0), new ClockTime(1, 30), new ClockTime(2, 0)],
+    },
+    {
+      name: "ticks a time interval with a non-divisible minute",
+      interval: new TimeInterval(new ClockTime(1, 0), new ClockTime(2, 0)),
+      minutes: 45,
+      want: [new ClockTime(1, 0), new ClockTime(1, 45)],
+    },
+  ])("$name", ({ interval, minutes, want }) => {
+    expect(interval.tick(minutes)).toEqual(want);
   });
 
   test("stringifies a TimeInterval", () => {

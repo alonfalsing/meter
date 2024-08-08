@@ -27,6 +27,10 @@ export class CalendarDate {
     return this.date.getUTCDate();
   }
 
+  get dayOfWeek() {
+    return this.date.getUTCDay();
+  }
+
   add(value: number, unit: CalendarUnit = "days") {
     const { year, month, day } = this;
     switch (unit) {

@@ -9,6 +9,10 @@ export class TimeInterval {
     invariant(start < end, `Invalid time interval: ${start} ~ ${end}`);
   }
 
+  contains(time: ClockTime): boolean {
+    return this.start <= time && time <= this.end;
+  }
+
   overlap(other: TimeInterval): boolean {
     return this.start < other.end && this.end > other.start;
   }
@@ -31,6 +35,13 @@ export class TimeInterval {
     }
 
     return intervals;
+  }
+
+  tick(minutes: number): ClockTime[] {
+    return Array.from(
+      { length: 1 + Math.floor((+this.end - +this.start) / minutes) },
+      (_, i) => new ClockTime(+this.start + i * minutes),
+    );
   }
 
   toString() {

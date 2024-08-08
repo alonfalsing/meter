@@ -18,6 +18,11 @@ describe("CalendarDate", () => {
     expect(() => new CalendarDate(year, month, day)).not.toThrow();
   });
 
+  test("gets the day of the week", () => {
+    const date = new CalendarDate(2021, 1, 1);
+    expect(date.dayOfWeek).toBe(5);
+  });
+
   test.each([
     {
       name: "adds a year",
