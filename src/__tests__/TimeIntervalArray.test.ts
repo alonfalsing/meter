@@ -1,7 +1,5 @@
 import { describe, expect, test } from "@jest/globals";
-import { ClockTime } from "../ClockTime";
-import { TimeInterval } from "../TimeInterval";
-import { TimeIntervalArray } from "../TimeIntervalArray";
+import { ClockTime, TimeInterval, TimeIntervalArray } from "..";
 
 describe("TimeIntervalArray", () => {
   test("constructs a TimeIntervalArray", () => {

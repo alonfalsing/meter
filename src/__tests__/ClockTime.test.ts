@@ -1,5 +1,5 @@
 import { describe, expect, test } from "@jest/globals";
-import { ClockTime } from "../ClockTime";
+import { ClockTime } from "..";
 
 describe("ClockTime", () => {
   test("constructs a ClockTime from minutes", () => {

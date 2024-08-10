@@ -1,5 +1,5 @@
 import { describe, expect, test } from "@jest/globals";
-import { CalendarDate, CalendarUnit } from "../CalendarDate";
+import { CalendarDate, CalendarUnit } from "..";
 
 describe("CalendarDate", () => {
   test.each([

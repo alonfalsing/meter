@@ -1,6 +1,5 @@
 import { describe, expect, test } from "@jest/globals";
-import { CalendarDate } from "../CalendarDate";
-import { DateRange } from "../DateRange";
+import { CalendarDate, DateRange } from "..";
 
 describe("DateRange", () => {
   test.each([

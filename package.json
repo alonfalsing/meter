@@ -1,7 +1,7 @@
 {
   "name": "@alonfalsing/meter",
   "packageManager": "yarn@4.4.0",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "license": "MIT",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
@@ -31,6 +31,6 @@
     "prepare": "husky",
     "build": "tsc",
     "test": "jest",
-    "prepublishOnly": "yarn build && yarn test"
+    "prepack": "yarn build && yarn test"
   }
 }
