@@ -86,4 +86,9 @@ describe("CalendarDate", () => {
     const date = new CalendarDate(2021, 1, 1);
     expect(`${date}`).toBe("2021-01-01");
   });
+
+  test("converts to a date", () => {
+    const date = new CalendarDate(2021, 1, 1);
+    expect(date.toDate()).toEqual(new Date(Date.UTC(2021, 0, 1)));
+  });
 });

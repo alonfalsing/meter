@@ -4,7 +4,7 @@ import { padStart } from "./strings";
 export type DateUnit = "year" | "years" | "month" | "months" | "day" | "days";
 
 export class CalendarDate {
-  private date: Date;
+  private readonly date: Date;
 
   static fromString(str: string): CalendarDate {
     const match = str.match(/^(\d{4})-(\d{2})-(\d{2})$/);
@@ -78,5 +78,9 @@ export class CalendarDate {
           .map((each) => padStart(`${each}`, 2, "0"))
           .join("-");
     }
+  }
+
+  toDate() {
+    return new Date(this.date);
   }
 }
