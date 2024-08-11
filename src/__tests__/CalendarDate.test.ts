@@ -1,5 +1,5 @@
 import { describe, expect, test } from "@jest/globals";
-import { CalendarDate, CalendarUnit } from "..";
+import { CalendarDate, DateUnit } from "..";
 
 describe("CalendarDate", () => {
   test.each([
@@ -67,7 +67,7 @@ describe("CalendarDate", () => {
     },
   ])("$name", ({ value, unit, want }) => {
     const date = new CalendarDate(2021, 1, 1);
-    expect(date.add(value, unit as CalendarUnit)).toEqual(want);
+    expect(date.add(value, unit as DateUnit)).toEqual(want);
   });
 
   test("calculates days from another date", () => {

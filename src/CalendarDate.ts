@@ -1,13 +1,7 @@
 import invariant from "tiny-invariant";
 import { padStart } from "./strings";
 
-export type CalendarUnit =
-  | "year"
-  | "years"
-  | "month"
-  | "months"
-  | "day"
-  | "days";
+export type DateUnit = "year" | "years" | "month" | "months" | "day" | "days";
 
 export class CalendarDate {
   private date: Date;
@@ -51,7 +45,7 @@ export class CalendarDate {
     return this.date.getUTCDay();
   }
 
-  add(value: number, unit: CalendarUnit = "days") {
+  add(value: number, unit: DateUnit = "days") {
     const { year, month, day } = this;
     switch (unit) {
       case "year":
