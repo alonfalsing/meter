@@ -57,4 +57,8 @@ export class Instant {
         return `${this.date}T${this.time}`;
     }
   }
+
+  toDate() {
+    return new Date(+this * 1000);
+  }
 }

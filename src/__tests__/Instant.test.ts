@@ -68,4 +68,12 @@ describe("Instant", () => {
     );
     expect(`${instant}`).toBe("2021-01-01T01:30");
   });
+
+  test("converts to a date", () => {
+    const instant = new Instant(
+      new CalendarDate(2021, 1, 1),
+      new ClockTime(1, 30),
+    );
+    expect(instant.toDate()).toEqual(new Date(Date.UTC(2021, 0, 1, 1, 30)));
+  });
 });
