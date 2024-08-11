@@ -95,5 +95,7 @@ describe("CalendarMonth", () => {
     expect(month.thru).toEqual(new CalendarDate(2021, 2, 6));
     expect(month.startOfMonth).toEqual(new CalendarDate(2021, 1, 1));
     expect(month.endOfMonth).toEqual(new CalendarDate(2021, 1, 31));
+    expect(month.year).toBe(2021);
+    expect(month.month).toBe(1);
   });
 });

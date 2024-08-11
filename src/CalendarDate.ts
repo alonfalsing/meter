@@ -1,3 +1,4 @@
+import invariant from "tiny-invariant";
 import { padStart } from "./strings";
 
 export type CalendarUnit =
@@ -10,6 +11,25 @@ export type CalendarUnit =
 
 export class CalendarDate {
   private date: Date;
+
+  static fromString(str: string): CalendarDate {
+    const match = str.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    invariant(match, `Invalid date: ${str}`);
+
+    return new CalendarDate(
+      parseInt(match[1]),
+      parseInt(match[2]),
+      parseInt(match[3]),
+    );
+  }
+
+  static fromUTCDate(date: Date): CalendarDate {
+    return new CalendarDate(
+      date.getUTCFullYear(),
+      date.getUTCMonth() + 1,
+      date.getUTCDate(),
+    );
+  }
 
   constructor(year: number, month: number, day: number = 1) {
     this.date = new Date(Date.UTC(year, month - 1, day));

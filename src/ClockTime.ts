@@ -5,6 +5,17 @@ export class ClockTime {
   readonly hour: number;
   readonly minute: number;
 
+  static fromString(str: string): ClockTime {
+    const match = str.match(/^(\d{1,2}):(\d{1,2})$/);
+    invariant(match, `Invalid time: ${str}`);
+
+    return new ClockTime(parseInt(match[1]), parseInt(match[2]));
+  }
+
+  static fromUTCDate(date: Date): ClockTime {
+    return new ClockTime(date.getUTCHours(), date.getUTCMinutes());
+  }
+
   constructor(minutes: number);
   constructor(hour: number, minute: number);
   constructor(m: number, n?: number) {

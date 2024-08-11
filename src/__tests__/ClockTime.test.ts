@@ -41,6 +41,41 @@ describe("ClockTime", () => {
     ).toThrowError(error);
   });
 
+  test.each([
+    {
+      name: "parses a string",
+      input: "01:30",
+      want: new ClockTime(1, 30),
+    },
+    {
+      name: "parses a string with leading zero",
+      input: "01:03",
+      want: new ClockTime(1, 3),
+    },
+    {
+      name: "parses a string with single digit hour",
+      input: "1:30",
+      want: new ClockTime(1, 30),
+    },
+    {
+      name: "parses a string with single digit minute",
+      input: "01:3",
+      want: new ClockTime(1, 3),
+    },
+    {
+      name: "parses a string with single digit hour and minute",
+      input: "1:3",
+      want: new ClockTime(1, 3),
+    },
+  ])("$name", ({ input, want }) => {
+    expect(ClockTime.fromString(input)).toEqual(want);
+  });
+
+  test("converts from a Date", () => {
+    const date = new Date(Date.UTC(2021, 0, 1, 1, 30));
+    expect(ClockTime.fromUTCDate(date)).toEqual(new ClockTime(1, 30));
+  });
+
   test("converts to a number", () => {
     const time = new ClockTime(1, 30);
     expect(+time).toBe(90);

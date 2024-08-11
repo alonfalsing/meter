@@ -48,4 +48,12 @@ export class CalendarMonth extends DateRange {
     this.startOfMonth = startOfMonth;
     this.endOfMonth = endOfMonth;
   }
+
+  get year() {
+    return this.startOfMonth.year;
+  }
+
+  get month() {
+    return this.startOfMonth.month;
+  }
 }

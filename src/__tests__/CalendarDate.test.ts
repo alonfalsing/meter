@@ -18,6 +18,18 @@ describe("CalendarDate", () => {
     expect(() => new CalendarDate(year, month, day)).not.toThrow();
   });
 
+  test("parses a string", () => {
+    expect(CalendarDate.fromString("2021-01-01")).toEqual(
+      new CalendarDate(2021, 1, 1),
+    );
+  });
+
+  test("converts from a UTC date", () => {
+    expect(CalendarDate.fromUTCDate(new Date(Date.UTC(2021, 0, 1)))).toEqual(
+      new CalendarDate(2021, 1, 1),
+    );
+  });
+
   test("gets the day of the week", () => {
     const date = new CalendarDate(2021, 1, 1);
     expect(date.dayOfWeek).toBe(5);
