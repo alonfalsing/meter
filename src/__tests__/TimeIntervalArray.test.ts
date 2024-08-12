@@ -24,6 +24,16 @@ describe("TimeIntervalArray", () => {
     );
   });
 
+  test("checks if a time is contained in any interval", () => {
+    const intervalArray = new TimeIntervalArray([
+      new TimeInterval(new ClockTime(1, 0), new ClockTime(2, 0)),
+      new TimeInterval(new ClockTime(3, 0), new ClockTime(4, 0)),
+    ]);
+
+    expect(intervalArray.contains(new ClockTime(1, 30))).toBe(true);
+    expect(intervalArray.contains(new ClockTime(2, 30))).toBe(false);
+  });
+
   test.each([
     {
       name: "subtracts a non-overlapping interval",

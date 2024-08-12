@@ -2,10 +2,19 @@ import { describe, expect, test } from "@jest/globals";
 import { CalendarDate, ClockTime, Instant } from "..";
 
 describe("Instant", () => {
-  test("parses a string", () => {
-    expect(Instant.fromString("2021-01-01T00:00")).toEqual(
-      new Instant(new CalendarDate(2021, 1, 1), new ClockTime(0, 0)),
-    );
+  test.each([
+    {
+      name: "parses a string",
+      str: "2021-01-01T00:00",
+      want: new Instant(new CalendarDate(2021, 1, 1), new ClockTime(0, 0)),
+    },
+    {
+      name: "parses a string with a space",
+      str: "2021-01-01 01:30",
+      want: new Instant(new CalendarDate(2021, 1, 1), new ClockTime(1, 30)),
+    },
+  ])("$name", ({ str, want }) => {
+    expect(Instant.fromString(str)).toEqual(want);
   });
 
   test("converts from a UTC date", () => {

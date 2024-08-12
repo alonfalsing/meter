@@ -1,4 +1,5 @@
 import invariant from "tiny-invariant";
+import { ClockTime } from "./ClockTime";
 import { TimeInterval } from "./TimeInterval";
 
 export class TimeIntervalArray {
@@ -11,6 +12,10 @@ export class TimeIntervalArray {
           `Overlapping intervals: ${this.intervals[i]}, ${each}`,
         ),
       );
+  }
+
+  contains(time: ClockTime): boolean {
+    return this.intervals.some((i) => i.contains(time));
   }
 
   subtract(other: TimeInterval): TimeIntervalArray {

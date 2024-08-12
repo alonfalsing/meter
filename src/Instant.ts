@@ -11,7 +11,7 @@ export type TimeUnit =
 
 export class Instant {
   static fromString(str: string): Instant {
-    const [dateStr, timeStr] = str.split("T");
+    const [dateStr, timeStr] = str.split(/[T ]/);
     return new Instant(
       CalendarDate.fromString(dateStr),
       ClockTime.fromString(timeStr),
