@@ -138,6 +138,13 @@ describe("TimeInterval", () => {
       anchor: "end",
       want: [],
     },
+    {
+      name: "allocates zero minutes",
+      interval: new TimeInterval(new ClockTime(1, 0), new ClockTime(2, 0)),
+      minutes: 0,
+      anchor: "start",
+      want: [new TimeInterval(new ClockTime(1, 0), new ClockTime(2, 0))],
+    },
   ] as const)("$name", ({ interval, minutes, anchor, want }) => {
     expect(interval.alloc(minutes, anchor)).toEqual(want);
   });

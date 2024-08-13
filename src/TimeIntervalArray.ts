@@ -25,6 +25,11 @@ export class TimeIntervalArray {
   }
 
   alloc(minutes: number, anchor: "start" | "end"): TimeIntervalArray {
+    invariant(minutes >= 0);
+    if (!minutes) {
+      return this;
+    }
+
     return new TimeIntervalArray(
       this.intervals.flatMap((each) => each.alloc(minutes, anchor)),
     );

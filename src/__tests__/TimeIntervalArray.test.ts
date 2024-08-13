@@ -72,17 +72,41 @@ describe("TimeIntervalArray", () => {
     expect(intervalArray.subtract(interval)).toEqual(want);
   });
 
-  test("allocates time from intervals", () => {
+  test.each([
+    {
+      name: "allocates time from the start",
+      minutes: 30,
+      anchor: "start",
+      want: new TimeIntervalArray([
+        new TimeInterval(new ClockTime(1, 30), new ClockTime(2, 0)),
+        new TimeInterval(new ClockTime(3, 30), new ClockTime(4, 0)),
+      ]),
+    },
+    {
+      name: "allocates time from the end",
+      minutes: 30,
+      anchor: "end",
+      want: new TimeIntervalArray([
+        new TimeInterval(new ClockTime(1, 0), new ClockTime(1, 30)),
+        new TimeInterval(new ClockTime(3, 0), new ClockTime(3, 30)),
+      ]),
+    },
+    {
+      name: "allocates zero time",
+      minutes: 0,
+      anchor: "start",
+      want: new TimeIntervalArray([
+        new TimeInterval(new ClockTime(1, 0), new ClockTime(2, 0)),
+        new TimeInterval(new ClockTime(3, 0), new ClockTime(4, 0)),
+      ]),
+    },
+  ] as const)("$name", ({ minutes, anchor, want }) => {
     const intervalArray = new TimeIntervalArray([
       new TimeInterval(new ClockTime(1, 0), new ClockTime(2, 0)),
-      new TimeInterval(new ClockTime(4, 0), new ClockTime(4, 30)),
+      new TimeInterval(new ClockTime(3, 0), new ClockTime(4, 0)),
     ]);
 
-    expect(intervalArray.alloc(45, "start")).toEqual(
-      new TimeIntervalArray([
-        new TimeInterval(new ClockTime(1, 45), new ClockTime(2, 0)),
-      ]),
-    );
+    expect(intervalArray.alloc(minutes, anchor)).toEqual(want);
   });
 
   test("stringifies a TimeIntervalArray", () => {

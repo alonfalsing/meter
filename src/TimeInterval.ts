@@ -38,6 +38,11 @@ export class TimeInterval {
   }
 
   alloc(minutes: number, anchor: "start" | "end"): TimeInterval[] {
+    invariant(minutes >= 0);
+    if (!minutes) {
+      return [this];
+    }
+
     return this.subtract(
       anchor === "start"
         ? new TimeInterval(
