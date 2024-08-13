@@ -37,6 +37,20 @@ export class TimeInterval {
     return intervals;
   }
 
+  alloc(minutes: number, anchor: "start" | "end"): TimeInterval[] {
+    return this.subtract(
+      anchor === "start"
+        ? new TimeInterval(
+            this.start,
+            new ClockTime(Math.min(+this.start + minutes, +this.end)),
+          )
+        : new TimeInterval(
+            new ClockTime(Math.max(+this.start, +this.end - minutes)),
+            this.end,
+          ),
+    );
+  }
+
   tick(minutes: number): ClockTime[] {
     return Array.from(
       { length: 1 + Math.floor((+this.end - +this.start) / minutes) },

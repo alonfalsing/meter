@@ -72,6 +72,19 @@ describe("TimeIntervalArray", () => {
     expect(intervalArray.subtract(interval)).toEqual(want);
   });
 
+  test("allocates time from intervals", () => {
+    const intervalArray = new TimeIntervalArray([
+      new TimeInterval(new ClockTime(1, 0), new ClockTime(2, 0)),
+      new TimeInterval(new ClockTime(4, 0), new ClockTime(4, 30)),
+    ]);
+
+    expect(intervalArray.alloc(45, "start")).toEqual(
+      new TimeIntervalArray([
+        new TimeInterval(new ClockTime(1, 45), new ClockTime(2, 0)),
+      ]),
+    );
+  });
+
   test("stringifies a TimeIntervalArray", () => {
     const intervalArray = new TimeIntervalArray([
       new TimeInterval(new ClockTime(1, 0), new ClockTime(2, 0)),

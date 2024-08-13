@@ -111,6 +111,39 @@ describe("TimeInterval", () => {
 
   test.each([
     {
+      name: "allocates minutes from the start",
+      interval: new TimeInterval(new ClockTime(1, 0), new ClockTime(2, 0)),
+      minutes: 30,
+      anchor: "start",
+      want: [new TimeInterval(new ClockTime(1, 30), new ClockTime(2, 0))],
+    },
+    {
+      name: "allocates minutes from the end",
+      interval: new TimeInterval(new ClockTime(1, 0), new ClockTime(2, 0)),
+      minutes: 30,
+      anchor: "end",
+      want: [new TimeInterval(new ClockTime(1, 0), new ClockTime(1, 30))],
+    },
+    {
+      name: "allocates minutes longer than the interval from the start",
+      interval: new TimeInterval(new ClockTime(1, 0), new ClockTime(2, 0)),
+      minutes: 90,
+      anchor: "start",
+      want: [],
+    },
+    {
+      name: "allocates minutes longer than the interval from the end",
+      interval: new TimeInterval(new ClockTime(1, 0), new ClockTime(2, 0)),
+      minutes: 90,
+      anchor: "end",
+      want: [],
+    },
+  ] as const)("$name", ({ interval, minutes, anchor, want }) => {
+    expect(interval.alloc(minutes, anchor)).toEqual(want);
+  });
+
+  test.each([
+    {
       name: "ticks a time interval",
       interval: new TimeInterval(new ClockTime(1, 0), new ClockTime(2, 0)),
       minutes: 30,

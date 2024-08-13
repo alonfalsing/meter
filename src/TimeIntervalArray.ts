@@ -24,6 +24,12 @@ export class TimeIntervalArray {
     );
   }
 
+  alloc(minutes: number, anchor: "start" | "end"): TimeIntervalArray {
+    return new TimeIntervalArray(
+      this.intervals.flatMap((each) => each.alloc(minutes, anchor)),
+    );
+  }
+
   toString() {
     return `[${this.intervals.join(", ")}]`;
   }
